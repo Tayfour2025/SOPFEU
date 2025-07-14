@@ -11,23 +11,22 @@
   </div>
   <script src="https://www.sopfeu.qc.ca/sopfeu-widget.js"></script>
   <script>
-    // Fonction pour masquer le lien "Voir sur la carte"
-    function hideVoirSurLaCarte() {
-      // Sélectionne tous les liens dans le container du widget
+    function hideVoirSurLaCarteParent() {
       var links = document.querySelectorAll('#sopfeu-widget-container a');
       links.forEach(function(link) {
         if (link.textContent.trim().startsWith('Voir sur la carte')) {
-          link.style.display = 'none';
+          // Masque le parent du lien (le cadre)
+          if (link.parentElement) {
+            link.parentElement.style.display = 'none';
+          }
         }
       });
     }
 
-    // Relance la fonction plusieurs fois pour être sûr que le widget est chargé
     let tries = 0;
     let interval = setInterval(function() {
-      hideVoirSurLaCarte();
+      hideVoirSurLaCarteParent();
       tries++;
-      // Arrête après 5 secondes (10 tentatives)
       if (tries > 10) clearInterval(interval);
     }, 500);
   </script>
