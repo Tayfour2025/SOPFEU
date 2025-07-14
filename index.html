@@ -5,19 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOPFEU Widget</title>
   <style>
-    /* Taille maximum du widget (modifie ces valeurs selon ton besoin) */
     #sopfeu-widget-container {
-      max-width: 400px;    /* Largeur max */
-      margin: 0 auto;      /* Centré */
-      /* Optionnel : hauteur max
-      max-height: 350px;
-      overflow: auto;
-      */
+      max-width: 400px;   /* largeur maximale du widget */
+      height: 350px;      /* hauteur du widget, modifie selon besoin */
+      margin: 0 auto;     /* centrer le widget */
+      overflow: hidden;   /* masque le débordement éventuel */
     }
-    /* Pour le rendre responsive */
     @media (max-width: 450px) {
       #sopfeu-widget-container {
         max-width: 100%;
+        height: 250px;
       }
     }
   </style>
