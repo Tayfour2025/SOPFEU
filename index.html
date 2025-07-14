@@ -6,18 +6,19 @@
   <title>SOPFEU Widget</title>
   <style>
     #sopfeu-widget-container {
-      max-width: 400px;   /* largeur maximale du widget */
-      height: 350px;      /* hauteur du widget, modifie selon besoin */
-      margin: 0 auto;     /* centrer le widget */
-      overflow: hidden;   /* masque le débordement éventuel */
-      font-size: 18px;    /* <-- Ajoute cette ligne pour changer la taille du texte */
+      width: 600px;
+      height: 500px;
+      max-width: 100%;
+      margin: 0 auto;
+      overflow: hidden;
     }
-    @media (max-width: 450px) {
-      #sopfeu-widget-container {
-        max-width: 100%;
-        height: 320px;
-        font-size: 106px;  /* <-- Taille du texte sur petits écrans */
-      }
+    #sopfeu-widget-container iframe {
+      width: 100% !important;
+      height: 100% !important;
+      min-width: 0 !important;
+      min-height: 0 !important;
+      border: none !important;
+      display: block;
     }
   </style>
 </head>
@@ -26,23 +27,5 @@
     <span id="sopfeu-widget-loader"></span>
   </div>
   <script src="https://www.sopfeu.qc.ca/sopfeu-widget.js"></script>
-  <script>
-    function hideVoirSurLaCarteParent() {
-      var links = document.querySelectorAll('#sopfeu-widget-container a');
-      links.forEach(function(link) {
-        if (link.textContent.trim().startsWith('Voir sur la carte')) {
-          if (link.parentElement) {
-            link.parentElement.style.display = 'none';
-          }
-        }
-      });
-    }
-    let tries = 0;
-    let interval = setInterval(function() {
-      hideVoirSurLaCarteParent();
-      tries++;
-      if (tries > 10) clearInterval(interval);
-    }, 500);
-  </script>
 </body>
 </html>
