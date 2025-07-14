@@ -4,10 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOPFEU Widget</title>
-  <style>
-    /* Si le widget ajoute une classe spécifique, vous pouvez l'utiliser ici */
-    /* Exemple : .sopfeu-widget-map-link { display: none !important; } */
-  </style>
 </head>
 <body>
   <div data-sopfeu-lng="fr_CA" data-sopfeu-media="31" data-sopfeu-responsive="false" id="sopfeu-widget-container">
@@ -15,17 +11,24 @@
   </div>
   <script src="https://www.sopfeu.qc.ca/sopfeu-widget.js"></script>
   <script>
-    // Attend le chargement du widget puis masque le texte "VOIR SUR LA CARTE"
-    document.addEventListener("DOMContentLoaded", function() {
-      setTimeout(function() {
-        var links = document.querySelectorAll("#sopfeu-widget-container a, #sopfeu-widget-container div, #sopfeu-widget-container span");
-        links.forEach(function(el) {
-          if (el.textContent.includes("VOIR SUR LA CARTE")) {
-            el.style.display = "none";
-          }
-        });
-      }, 1000); // délai à ajuster si besoin
-    });
+    function hideVoirSurLaCarte() {
+      // Cherche tous les liens ou boutons dans le widget
+      var candidates = document.querySelectorAll('#sopfeu-widget-container *');
+      candidates.forEach(function(el) {
+        if (el.textContent && el.textContent.trim().includes('VOIR SUR LA CARTE')) {
+          el.style.display = 'none';
+        }
+      });
+    }
+
+    // Essaye plusieurs fois, car le widget se charge après coup
+    let tries = 0;
+    let interval = setInterval(function() {
+      hideVoirSurLaCarte();
+      tries++;
+      // Arrête après 5 secondes (10 essais)
+      if (tries > 10) clearInterval(interval);
+    }, 500);
   </script>
 </body>
 </html>
