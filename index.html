@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOPFEU Widget</title>
+  <title>SOPFEU Widget - Détection auto région</title>
   <style>
     #sopfeu-widget-container {
-      max-width: 400px;   /* largeur maximale du widget */
-      height: 350px;      /* hauteur du widget, modifie selon besoin */
-      margin: 0 auto;     /* centrer le widget */
-      overflow: hidden;   /* masque le débordement éventuel */
+      max-width: 400px;
+      height: 350px;
+      margin: 0 auto;
+      overflow: hidden;
     }
     @media (max-width: 450px) {
       #sopfeu-widget-container {
@@ -20,27 +20,80 @@
   </style>
 </head>
 <body>
-  <div data-sopfeu-lng="fr_CA" data-sopfeu-media="31" data-sopfeu-responsive="true" id="sopfeu-widget-container">
+  <div id="sopfeu-widget-container">
+    <!-- Le widget sera injecté ici dynamiquement -->
     <span id="sopfeu-widget-loader"></span>
   </div>
-  <script src="https://www.sopfeu.qc.ca/sopfeu-widget.js"></script>
   <script>
-    function hideVoirSurLaCarteParent() {
-      var links = document.querySelectorAll('#sopfeu-widget-container a');
-      links.forEach(function(link) {
-        if (link.textContent.trim().startsWith('Voir sur la carte')) {
-          if (link.parentElement) {
-            link.parentElement.style.display = 'none';
+    // Mapping entre régions et codes médias SOPFEU (à compléter selon besoin)
+    const regionToMedia = {
+      "Saguenay-Lac-Saint-Jean": 31,
+      "Abitibi-Témiscamingue": 15,
+      "Laurentides": 25,
+      "Estrie": 5,
+      "Mauricie": 22,
+      "Outaouais": 27,
+      "Lanaudière": 24,
+      "Capitale-Nationale": 9,
+      "Côte-Nord": 13,
+      "Chaudière-Appalaches": 8,
+      "Bas-Saint-Laurent": 2,
+      "Centre-du-Québec": 10,
+      "Montréal": 28,
+      "Laval": 29,
+      "Montérégie": 30,
+      // Ajoute d'autres régions au besoin…
+    };
+
+    fetch("https://ipinfo.io/json?token=c71233d8d9ff4d")
+      .then(response => response.json())
+      .then(data => {
+        // Détermine la région de l'utilisateur
+        const region = data.region;
+        // Code média par défaut (Saguenay-Lac-Saint-Jean)
+        let sopfeuMedia = regionToMedia[region] || 31;
+
+        // Injecte le widget avec le bon paramètre
+        document.getElementById('sopfeu-widget-container').innerHTML =
+          `<div data-sopfeu-lng="fr_CA" data-sopfeu-media="${sopfeuMedia}" data-sopfeu-responsive="true" id="sopfeu-widget">
+             <span id="sopfeu-widget-loader"></span>
+           </div>`;
+
+        // Charge le script widget SOPFEU
+        var script = document.createElement('script');
+        script.src = 'https://www.sopfeu.qc.ca/sopfeu-widget.js';
+        document.body.appendChild(script);
+
+        // Masque le lien "Voir sur la carte" et son cadre
+        script.onload = function() {
+          function hideVoirSurLaCarteParent() {
+            var links = document.querySelectorAll('#sopfeu-widget a');
+            links.forEach(function(link) {
+              if (link.textContent.trim().toLowerCase().startsWith('voir sur la carte')) {
+                if (link.parentElement) {
+                  link.parentElement.style.display = 'none';
+                }
+              }
+            });
           }
-        }
+          let tries = 0;
+          let interval = setInterval(function() {
+            hideVoirSurLaCarteParent();
+            tries++;
+            if (tries > 10) clearInterval(interval);
+          }, 500);
+        };
+      })
+      .catch(() => {
+        // En cas d’erreur IP, affiche le widget avec la région par défaut
+        document.getElementById('sopfeu-widget-container').innerHTML =
+          `<div data-sopfeu-lng="fr_CA" data-sopfeu-media="31" data-sopfeu-responsive="true" id="sopfeu-widget">
+             <span id="sopfeu-widget-loader"></span>
+           </div>`;
+        var script = document.createElement('script');
+        script.src = 'https://www.sopfeu.qc.ca/sopfeu-widget.js';
+        document.body.appendChild(script);
       });
-    }
-    let tries = 0;
-    let interval = setInterval(function() {
-      hideVoirSurLaCarteParent();
-      tries++;
-      if (tries > 10) clearInterval(interval);
-    }, 500);
   </script>
 </body>
 </html>
