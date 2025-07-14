@@ -2,10 +2,19 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOPFEU Widget</title>
+  <title>Widget SOPFEU</title>
+  <style>
+    #sopfeu-widget-container {
+      width: 10px;    /* Modifie la largeur ici */
+      height: 30px;   /* Modifie la hauteur ici */
+      max-width: 100%; /* Pour le responsive */
+    }
+  </style>
 </head>
 <body>
- <div data-sopfeu-lng="fr_CA" data-sopfeu-media="31" data-sopfeu-responsive="true" id="sopfeu-widget-container"><span id="sopfeu-widget-loader"></span></div><script src="https://www.sopfeu.qc.ca/sopfeu-widget.js"></script>
+  <div data-sopfeu-lng="fr_CA" data-sopfeu-media="31" data-sopfeu-responsive="true" id="sopfeu-widget-container">
+    <span id="sopfeu-widget-loader"></span>
+  </div>
+  <script src="https://www.sopfeu.qc.ca/sopfeu-widget.js"></script>
 </body>
 </html>
