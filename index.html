@@ -3,29 +3,116 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOPFEU Widget</title>
+  <title>Indice de feu - Saguenay</title>
   <style>
-    #sopfeu-widget-container {
-      width: 650px;
-      height: 750px;
-      max-width: 100%;
-      margin: 0 auto;
-      overflow: hidden;
+    body {
+      background: #23395d;
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
     }
-    #sopfeu-widget-container iframe {
-      width: 100% !important;
-      height: 100% !important;
-      min-width: 0 !important;
-      min-height: 0 !important;
-      border: none !important;
-      display: block;
+    .cadre-indice-feu {
+      background: #172849;
+      border-radius: 12px;
+      width: 500px;        /* ← Modifie cette largeur selon ton besoin */
+      min-height: 210px;   /* ← Modifie cette hauteur selon ton besoin */
+      margin: 40px auto;
+      padding: 28px 32px 20px 32px;
+      box-sizing: border-box;
+      color: white;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .titre-indice {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+    .ville-indice {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.3em;
+      margin-bottom: 18px;
+    }
+    .jauge-feu {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 8px;
+      width: 100%;
+    }
+    .niveau {
+      flex: 1;
+      height: 26px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 1em;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .niveau.bas {
+      background: #304b96;
+    }
+    .niveau.modere {
+      background: #56ac3b;
+    }
+    .niveau.eleve {
+      background: #ffd600;
+      color: #222;
+    }
+    .niveau.treseleve {
+      background: #f77917;
+    }
+    .niveau.extreme {
+      background: #e63d3c;
+    }
+    .fleche-indice {
+      width: 0; height: 0;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-top: 18px solid white;
+      margin: 0 auto 0 auto;
+    }
+    .label-jauge {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1em;
+      color: #fff;
+      margin-top: 6px;
     }
   </style>
 </head>
 <body>
-  <div data-sopfeu-lng="fr_CA" data-sopfeu-media="31" data-sopfeu-responsive="true" id="sopfeu-widget-container">
-    <span id="sopfeu-widget-loader"></span>
+  <div class="cadre-indice-feu">
+    <div class="titre-indice">Danger d'incendie</div>
+    <div class="ville-indice">
+      Prévision pour: <span style="font-weight:bold;">Saguenay</span>
+    </div>
+    <div class="jauge-feu">
+      <div class="niveau bas"> </div>
+      <div class="niveau modere"> </div>
+      <div class="niveau eleve"> </div>
+      <div class="niveau treseleve"> </div>
+      <div class="niveau extreme"> </div>
+    </div>
+    <div class="label-jauge">
+      <span>Bas</span>
+      <span>Modéré</span>
+      <span>Élevé</span>
+      <span>Très élevé</span>
+      <span>Extrême</span>
+    </div>
+    <div class="fleche-indice" style="margin-top:10px;"></div>
+    <!-- Tu peux déplacer la flèche pour indiquer le niveau -->
+    <div style="margin-top:16px;">
+      <a href="#" style="color: #fff; text-decoration: underline; font-weight:bold;">VOIR SUR LA CARTE</a>
+    </div>
   </div>
-  <script src="https://www.sopfeu.qc.ca/sopfeu-widget.js"></script>
 </body>
 </html>
