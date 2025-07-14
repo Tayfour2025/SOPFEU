@@ -1,1 +1,14 @@
-<div data-sopfeu-lng="fr_CA" data-sopfeu-media="31" data-sopfeu-responsive="false" id="sopfeu-widget-container"><span id="sopfeu-widget-loader"></span></div><script src="https://www.sopfeu.qc.ca/sopfeu-widget.js"></script>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOPFEU Widget</title>
+</head>
+<body>
+  <div data-sopfeu-lng="fr_CA" data-sopfeu-media="31" data-sopfeu-responsive="false" id="sopfeu-widget-container">
+    <span id="sopfeu-widget-loader"></span>
+  </div>
+  <script src="https://www.sopfeu.qc.ca/sopfeu-widget.js"></script>
+</body>
+</html>
