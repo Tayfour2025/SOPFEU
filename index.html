@@ -6,6 +6,20 @@
   <title>SOPFEU Widget</title>
 </head>
 <body>
+  <script>
+  // Attendez que le widget soit chargé
+  document.addEventListener("DOMContentLoaded", function() {
+    // Cherche tous les éléments contenant le texte "VOIR SUR LA CARTE"
+    setTimeout(function() {
+      var links = document.querySelectorAll("#sopfeu-widget-container a, #sopfeu-widget-container div, #sopfeu-widget-container span");
+      links.forEach(function(el) {
+        if (el.textContent.includes("VOIR SUR LA CARTE")) {
+          el.style.display = "none";
+        }
+      });
+    }, 1000); // attendre que le widget charge (peut ajuster le délai)
+  });
+</script>
   <div data-sopfeu-lng="fr_CA" data-sopfeu-media="31" data-sopfeu-responsive="false" id="sopfeu-widget-container">
     <span id="sopfeu-widget-loader"></span>
   </div>
