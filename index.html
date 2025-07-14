@@ -5,18 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOPFEU Widget</title>
   <style>
-    /* Modifie la taille du widget ici */
+    /* Taille maximum du widget (modifie ces valeurs selon ton besoin) */
     #sopfeu-widget-container {
-      width: 400px;      /* Largeur du widget */
-      height: 300px;     /* Hauteur du widget */
-      max-width: 100%;
-      margin: 0 auto;
-      /* overflow: hidden;  Décommente si tu veux masquer le débordement éventuel */
+      max-width: 400px;    /* Largeur max */
+      margin: 0 auto;      /* Centré */
+      /* Optionnel : hauteur max
+      max-height: 350px;
+      overflow: auto;
+      */
+    }
+    /* Pour le rendre responsive */
+    @media (max-width: 450px) {
+      #sopfeu-widget-container {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div data-sopfeu-lng="fr_CA" data-sopfeu-media="31" data-sopfeu-responsive="false" id="sopfeu-widget-container">
+  <div data-sopfeu-lng="fr_CA" data-sopfeu-media="31" data-sopfeu-responsive="true" id="sopfeu-widget-container">
     <span id="sopfeu-widget-loader"></span>
   </div>
   <script src="https://www.sopfeu.qc.ca/sopfeu-widget.js"></script>
@@ -31,7 +38,6 @@
         }
       });
     }
-
     let tries = 0;
     let interval = setInterval(function() {
       hideVoirSurLaCarteParent();
